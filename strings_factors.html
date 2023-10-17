@@ -440,15 +440,15 @@ vec_sex</code></pre>
 <pre class="r"><code>as.numeric(vec_sex)</code></pre>
 <pre><code>## [1] 1 1 2 2</code></pre>
 </div>
-<div id="nsduh" class="section level2">
-<h2>nsduh</h2>
+<div id="nsduh-dataset" class="section level2">
+<h2>nsduh dataset</h2>
 <pre class="r"><code>nsduh_url = &quot;http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm&quot;
 
 table_marj = 
   read_html(nsduh_url) |&gt; 
   html_table() |&gt; 
   first() |&gt;
-  slice(-1)</code></pre>
+  slice(-1) #gets rid of the text from the first row that we dont need </code></pre>
 <pre class="r"><code>data_marj = 
   table_marj |&gt;
   select(-contains(&quot;P Value&quot;)) |&gt;

@@ -92,7 +92,7 @@ vec_sex
 as.numeric(vec_sex)
 ```
 
-## nsduh
+## nsduh dataset
 
 ```{r}
 nsduh_url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
@@ -101,7 +101,7 @@ table_marj =
   read_html(nsduh_url) |> 
   html_table() |> 
   first() |>
-  slice(-1)
+  slice(-1) #gets rid of the text from the first row that we dont need 
 ```
 
 ```{r}
@@ -114,16 +114,16 @@ data_marj =
     values_to = "percent") |>
   separate(age_year, into = c("age", "year"), sep = "\\(") |>
   mutate(
-    year = str_replace(year, "\\)", ""),
-    percent = str_replace(percent, "[a-c]$", ""),
+    year = str_replace(year, "\\)", ""), 
+    percent = str_replace(percent, "[a-b]$", ""),
     percent = as.numeric(percent)) |>
-  filter(!(State %in% c("Total U.S.", "Northeast", "Midwest", "South", "West")))
+  filter(!(State %in% c("Total U.S.", "Northeast", "Midwest", "South", "West"))) # ! = any time that its not the case 
 ```
 
 ```{r}
 data_marj |>
   filter(age == "12-17") |> 
-  mutate(State = fct_reorder(State, percent)) |> 
+  mutate(State = fct_reorder(State, percent)) |> ## puts the graph in order and makes it look linear 
   ggplot(aes(x = State, y = percent, color = year)) + 
     geom_point() + 
     theme(axis.text.x = element_text(angle = 90, hjust = 1))
