@@ -1,0 +1,88 @@
+---
+title: "strings_and_factors"
+output: html_document
+date: "2023-10-17"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(rvest)
+library(p8105.datasets)
+library(tidyverse)
+```
+
+## strings and manipulation 
+
+```{r}
+string_vec = c("my", "name", "is", "wynter")
+
+str_detect(string_vec, "wynter") ## when you want to find if something exists, used commonly with filter
+
+str_replace(string_vec, "wynter", "Wynter")
+```
+
+```{r}
+string_vec = c(
+  "i think we all rule for participating",
+  "i think i have been caught",
+  "i think this will be quite fun actually",
+  "it will be fun, i think"
+  )
+
+str_detect(string_vec, "^i think") ## ^ = starts with/beginning of a line 
+
+str_detect(string_vec, "i think$") ## $ = the ending of a line 
+```
+
+```{r}
+string_vec = c(
+  "Time for a Pumpkin Spice Latte!",
+  "went to the #pumpkinpatch last weekend",
+  "Pumpkin Pie is obviously the best pie",
+  "SMASHING PUMPKINS -- LIVE IN CONCERT!!"
+  )
+
+str_detect(string_vec,"[Pp]umpkin") ## [] = anything in the bracket will match, in this case the P and p
+```
+
+```{r}
+string_vec = c(
+  '7th inning stretch',
+  '1st half soon to begin. Texas won the toss.',
+  'she is 5 feet 4 inches tall',
+  '3AM - cant sleep :('
+  )
+
+str_detect(string_vec, "^[0-9][a-zA-Z]") ## any line starting with the numbers 0-9, lines with upper and lower case letters a-z 
+```
+
+```{r}
+string_vec = c(
+  'Its 7:11 in the evening',
+  'want to go to 7-11?',
+  'my flight is AA711',
+  'NetBios: scanning ip 203.167.114.66'
+  )
+
+str_detect(string_vec, "7.11") # 7, any character, 11 
+```
+
+```{r}
+string_vec = c(
+  'The CI is [2, 5]',
+  ':-]',
+  ':-[',
+  'I found the answer on pages [6-7]'
+  )
+
+str_detect(string_vec, "\\[") ## // = any instance where the square bracket exists
+```
+
+## factors 
+```{r}
+
+```
+
